@@ -23,14 +23,18 @@ public class PostService {
         // DB 저장
         Post savePost = postRepository.save(post);
         // Entity -> ResponseDto
-        PostResponseDto PostResponseDto = new PostResponseDto(post);
-        return PostResponseDto;
+        PostResponseDto postResponseDto = new PostResponseDto(savePost);
+        return postResponseDto;
     }
 
     // 글 조회
     public List<PostResponseDto> getPosts() {
         // DB 조회
-        return postRepository.findAll().stream().map(PostResponseDto::new).toList();
+        return postRepository
+                .findAll()
+                .stream()
+                .map(PostResponseDto::new)
+                .toList();
     }
 
     // 선택 글 조회
